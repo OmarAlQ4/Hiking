@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>وِعْر – رحلات وفعاليات</title>
+  <title>خُطوة – الخطوة الأولى لرحلتك</title>
+  <meta name="description" content="خُطوة – منصة لحجز الرحلات البرية والفعاليات والمغامرات في السعودية. هايكنق، تسلق، كمبينق، ساكتون وأكثر.">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- CSS بالترتيب الصحيح -->
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="icon" href="assets/images/5twah-logo.png" type="image/png">
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="logo">وِعْر<span>.</span></div>
+  <img src="assets/images/5twah-logo.png" alt="خُطوة" class="nav-logo-img">
+  <span class="logo-text">خُطوة</span>
   <ul class="nav-links">
     <li><a href="#">الرحلات</a></li>
     <li><a href="#">الفعاليات</a></li>
@@ -33,15 +34,21 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-tag">🏔 رحلات برية | فعاليات | مغامرات</div>
-  <h1>اكتشف <em>الوعر</em><br>ابحث عن نفسك</h1>
-  <p class="hero-sub">هايكنق، صخور، كهوف، واحات. كل رحلة قصة ما انقالت لك بعد.</p>
-  <div class="hero-actions">
-    <button class="btn-hero" onclick="scrollTo({top:500,behavior:'smooth'})">ابحث عن رحلة</button>
+  <div class="hero-particles">
+    <div class="hero-particle"></div><div class="hero-particle"></div>
+    <div class="hero-particle"></div><div class="hero-particle"></div>
+    <div class="hero-particle"></div><div class="hero-particle"></div>
+  </div>
+  <div class="hero-mountain-deco"></div>
+  <div class="hero-tag animate-in">🥾 رحلات برية · فعاليات · مغامرات</div>
+  <h1 class="animate-in animate-in-delay-1">الخطوة الأولى<br>لـ<em>رحلتك</em></h1>
+  <p class="hero-sub animate-in animate-in-delay-2">هايكنق، صخور، كهوف، واحات. كل رحلة تبدأ بخطوة واحدة.</p>
+  <div class="hero-actions animate-in animate-in-delay-3">
+    <button class="btn-hero" onclick="scrollTo({top:500,behavior:'smooth'})">🔍 ابحث عن رحلة</button>
     <button class="btn-hero-ghost" onclick="openModal('organizer')">أضف رحلتك ←</button>
   </div>
-  <div class="hero-stats">
-    <div><div class="stat-num">+2,400</div><div class="stat-label">مشترك في الرحلات</div></div>
+  <div class="hero-stats animate-in animate-in-delay-4">
+    <div><div class="stat-num">+2,400</div><div class="stat-label">مغامر أخذ خطوته</div></div>
     <div><div class="stat-num">180+</div><div class="stat-label">رحلة وفعالية</div></div>
     <div><div class="stat-num">4.9★</div><div class="stat-label">متوسط التقييم</div></div>
   </div>
@@ -69,8 +76,8 @@
 </div>
 
 <!-- CATEGORIES -->
-<section style="background: rgba(45,58,50,0.4);">
-  <div class="section-header"><h2 class="section-title">تصفّح حسب <span>النوع</span></h2></div>
+<section style="background: rgba(30,42,34,0.5);">
+  <div class="section-header"><h2 class="section-title">اختر <span>خطوتك</span></h2></div>
   <div class="cats-grid">
     <div class="cat-card active" data-cat="هايكنق" onclick="filterCat(this)"><div class="cat-icon">🥾</div><div class="cat-name">هايكنق</div><div class="cat-count">47 رحلة</div></div>
     <div class="cat-card" data-cat="تسلق وصخور" onclick="filterCat(this)"><div class="cat-icon">🧗</div><div class="cat-name">تسلق وصخور</div><div class="cat-count">23 رحلة</div></div>
@@ -93,28 +100,33 @@
 <!-- ORGANIZER CTA -->
 <div class="organizer-cta">
   <div class="cta-text">
-    <h2>عندك رحلة تبي تنظمها؟<br>اعرضها هنا 🏔</h2>
-    <p>سجّل كمنظم وابدأ تبيع مقاعدك لآلاف المغامرين. بدون رسوم تسجيل، عمولة بسيطة بس على كل حجز.</p>
+    <h2>عندك رحلة تبي تنظمها؟<br>ابدأ بخطوة 🥾</h2>
+    <p>سجّل كمنظم في خُطوة وابدأ تبيع مقاعدك لآلاف المغامرين. بدون رسوم تسجيل، عمولة بسيطة على كل حجز.</p>
   </div>
   <button class="btn-cta" onclick="openModal('organizer')">ابدأ كمنظم ←</button>
 </div>
 
 <!-- REVIEWS -->
-<section style="background: rgba(45,58,50,0.3);">
-  <div class="section-header"><h2 class="section-title">قالوا <span>عن وعر</span></h2></div>
+<section style="background: rgba(30,42,34,0.4);">
+  <div class="section-header"><h2 class="section-title">خطواتهم <span>في خُطوة</span></h2></div>
   <div class="reviews-grid">
-    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"أحسن تجربة في حياتي. الهايك كان منظّم، والمنظم محترف جداً. راح أكرر التجربة!"</div><div class="reviewer"><div class="reviewer-avatar" style="background:#4A6741">خ</div><div><div class="reviewer-name">خالد العمري</div><div class="reviewer-trip">هايك وادي نمار</div></div></div></div>
-    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"الساكتون في الباحة كان خيالي. المنظم وفّر كل شي حتى المعدات. سعر معقول جداً."</div><div class="reviewer"><div class="reviewer-avatar" style="background:#C4773B">ر</div><div><div class="reviewer-name">ريم السبيعي</div><div class="reviewer-trip">ساكتون وادي ضي</div></div></div></div>
-    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"من أول رحلة وأنا مدمن على الموقع. سهل الحجز والدفع، ودايم ألقى شي جديد."</div><div class="reviewer"><div class="reviewer-avatar" style="background:#2D3A32">ع</div><div><div class="reviewer-name">عبدالله الحارثي</div><div class="reviewer-trip">تسلق جبل اللوز</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"أحسن تجربة في حياتي. الهايك كان منظّم والمنظم محترف. أول خطوة وأنا مدمن!"</div><div class="reviewer"><div class="reviewer-avatar" style="background:linear-gradient(135deg,#2D6B3F,#3D9B56)">خ</div><div><div class="reviewer-name">خالد العمري</div><div class="reviewer-trip">هايك وادي نمار</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"الساكتون في الباحة كان خيالي. المنظم وفّر كل شي حتى المعدات. خطوة تستاهل كل ريال."</div><div class="reviewer"><div class="reviewer-avatar" style="background:linear-gradient(135deg,#E8B84D,#F0D080)">ر</div><div><div class="reviewer-name">ريم السبيعي</div><div class="reviewer-trip">ساكتون وادي ضي</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"من أول خطوة وأنا مدمن على المنصة. سهل الحجز والدفع، ودايم ألقى شي جديد."</div><div class="reviewer"><div class="reviewer-avatar" style="background:linear-gradient(135deg,#15,26,18,#2D6B3F)">ع</div><div><div class="reviewer-name">عبدالله الحارثي</div><div class="reviewer-trip">تسلق جبل اللوز</div></div></div></div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">وِعْر<span>.</span></div>
-  <div class="footer-sub">الوجهة الأولى لمحبي المغامرة والطبيعة في السعودية</div>
-  <div class="footer-links"><a href="#">الرحلات</a><a href="#">الفعاليات</a><a href="#">المنظمون</a><a href="#">سياسة الإلغاء</a><a href="#">اتصل بنا</a><a href="#">X</a><a href="#">إنستقرام</a></div>
-  <div class="footer-copy">© 2025 وعر – جميع الحقوق محفوظة</div>
+  <img src="assets/images/5twah-logo.png" alt="خُطوة" class="footer-logo-img">
+  <span class="footer-logo-text">خُطوة</span>
+  <div class="footer-sub">الخطوة الأولى لرحلتك 🥾</div>
+  <div class="footer-links">
+    <a href="#">الرحلات</a><a href="#">الفعاليات</a><a href="#">المنظمون</a>
+    <a href="#">سياسة الإلغاء</a><a href="#">اتصل بنا</a>
+    <a href="#">X</a><a href="#">إنستقرام</a>
+  </div>
+  <div class="footer-copy">© 2025 خُطوة – الخطوة الأولى لرحلتك</div>
 </footer>
 
 <!-- AUTH MODAL -->
@@ -135,7 +147,7 @@
       <div class="form-field"><label>الاسم الكامل</label><input id="regName" type="text" placeholder="اسمك الكامل"></div>
       <div class="form-field"><label>الإيميل</label><input id="regEmail" type="email" placeholder="email@example.com"></div>
       <div class="form-field"><label>كلمة المرور</label><input id="regPass" type="password" placeholder="••••••••"></div>
-      <button class="btn-submit" onclick="doRegister()">سجّل الآن ←</button>
+      <button class="btn-submit" onclick="doRegister()">ابدأ خطوتك ←</button>
       <div class="form-footer">عندك حساب؟ <a onclick="switchTab('login')">دخول</a></div>
     </div>
   </div>
@@ -145,22 +157,25 @@
 <div class="modal-overlay" id="bookModal">
   <div class="modal book-modal">
     <button class="modal-close" onclick="closeModal('bookModal')">✕</button>
-    <h2>احجز مقعدك 🎒</h2>
+    <h2>اكمل خطوتك 🎒</h2>
     <div class="book-trip-info">
-      <div class="book-trip-name" id="bookTripName">هايك وادي نمار</div>
-      <div class="book-trip-meta" id="bookTripMeta">هايكنق · الرياض</div>
+      <div class="book-trip-name" id="bookTripName"></div>
+      <div class="book-trip-meta" id="bookTripMeta"></div>
     </div>
     <div class="form-field"><label>عدد المشاركين</label><input type="number" value="1" min="1" max="10" id="numPersons" oninput="updateTotal()"></div>
     <div class="form-field"><label>اسمك الكامل</label><input type="text" id="bookName" placeholder="اسمك"></div>
     <div class="form-field"><label>رقم الجوال</label><input type="text" id="bookPhone" placeholder="05xxxxxxxx"></div>
-    <label style="font-size:13px;color:var(--mist);font-weight:600;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:10px;">طريقة الدفع</label>
+    <div id="moyasar-payment-section" style="display:none;">
+      <div class="moyasar-payment-form"><h3>💳 اختر طريقة الدفع</h3><div id="moyasar-payment-element"></div></div>
+    </div>
+    <label style="font-size:12px;color:var(--mist-dim);font-weight:700;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:10px;margin-top:8px;">أو اختر سريع</label>
     <div class="payment-methods">
       <button class="pay-btn active" onclick="selectPay(this)">💳 بطاقة</button>
       <button class="pay-btn" onclick="selectPay(this)">🍎 Apple Pay</button>
-      <button class="pay-btn" onclick="selectPay(this)">💰 مدى</button>
+      <button class="pay-btn" onclick="selectPay(this)">💰 مدى / STC</button>
     </div>
-    <div class="total-row"><span class="total-label">الإجمالي</span><span class="total-amount" id="totalAmount">180 ريال</span></div>
-    <button class="btn-submit" onclick="confirmBooking()">تأكيد الحجز ←</button>
+    <div class="total-row"><span class="total-label">الإجمالي</span><span class="total-amount" id="totalAmount">0 ريال</span></div>
+    <button class="btn-submit" onclick="confirmBooking()">أكمل الخطوة ←</button>
   </div>
 </div>
 
@@ -168,7 +183,7 @@
 <div class="modal-overlay" id="orgModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('orgModal')">✕</button>
-    <h2>سجّل كمنظم 🏔</h2>
+    <h2>سجّل كمنظم في خُطوة 🥾</h2>
     <div class="form-field"><label>اسم المنظم أو المجموعة</label><input type="text" id="orgName" placeholder="فريق الجبل السعودي"></div>
     <div class="form-field"><label>رقم الجوال</label><input type="text" id="orgPhone" placeholder="05xxxxxxxx"></div>
     <div class="form-field"><label>الإيميل</label><input type="email" id="orgEmail" placeholder="email@example.com"></div>
@@ -196,10 +211,7 @@
     </div>
     <div class="detail-body">
       <div class="detail-grid" id="dInfoGrid"></div>
-      <div class="detail-section">
-        <div class="detail-section-title">📅 التواريخ المتاحة</div>
-        <div class="detail-dates" id="dDates"></div>
-      </div>
+      <div class="detail-section"><div class="detail-section-title">📅 التواريخ المتاحة</div><div class="detail-dates" id="dDates"></div></div>
       <div class="detail-section">
         <div class="detail-section-title">📍 الموقع ونقطة الانطلاق</div>
         <div class="detail-grid" style="margin-bottom:14px">
@@ -208,38 +220,23 @@
         </div>
         <a class="map-btn" id="dMapBtn" href="#" target="_blank">🗺 افتح في خرائط جوجل</a>
       </div>
-      <div class="detail-section">
-        <div class="detail-section-title">🧭 المرشد / القائد</div>
-        <div class="guide-card">
-          <div class="guide-avatar" id="dGuideAvatar"></div>
-          <div><div class="guide-name" id="dGuideName"></div><div class="guide-role">مرشد معتمد · وعر</div></div>
-        </div>
-      </div>
-      <div class="detail-section">
-        <div class="detail-section-title">✅ ماذا يشمل السعر</div>
-        <div class="includes-grid" id="dIncludes"></div>
-      </div>
-      <div class="detail-section">
-        <div class="detail-section-title">🎒 ماذا تجيب معك</div>
-        <div class="bring-list" id="dBring"></div>
-      </div>
-      <div class="detail-section">
-        <div class="detail-section-title">👤 الفئة المستهدفة والشروط</div>
-        <div class="detail-info-card"><div class="detail-info-value" id="dAge"></div></div>
-      </div>
+      <div class="detail-section"><div class="detail-section-title">🧭 المرشد / القائد</div><div class="guide-card"><div class="guide-avatar" id="dGuideAvatar"></div><div><div class="guide-name" id="dGuideName"></div><div class="guide-role">مرشد معتمد · خُطوة</div></div></div></div>
+      <div class="detail-section"><div class="detail-section-title">✅ ماذا يشمل السعر</div><div class="includes-grid" id="dIncludes"></div></div>
+      <div class="detail-section"><div class="detail-section-title">🎒 ماذا تجيب معك</div><div class="bring-list" id="dBring"></div></div>
+      <div class="detail-section"><div class="detail-section-title">👤 الفئة المستهدفة والشروط</div><div class="detail-info-card"><div class="detail-info-value" id="dAge"></div></div></div>
     </div>
     <div class="detail-footer">
       <div class="detail-price-block">
         <div class="price-main" id="dPriceFooter"></div>
         <div class="price-sub">للشخص الواحد · شامل الضريبة</div>
       </div>
-      <button class="btn-detail-book" id="dBookBtn">احجز مقعدك ←</button>
+      <button class="btn-detail-book" id="dBookBtn">اكمل خطوتك ←</button>
     </div>
   </div>
 </div>
 
-<!-- JS بالترتيب الصحيح: الاتصال ← المصادقة ← الرحلات ← الواجهة -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.moyasar.com/mp/v1/mp.js"></script>
 <script src="assets/js/supabase.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/trips.js"></script>
