@@ -1,53 +1,41 @@
-/* ═══════════════════════════════════════════
-   auth.js – تسجيل الدخول والتسجيل والخروج فقط
-   ═══════════════════════════════════════════ */
-
-/* ── تسجيل دخول ── */
 async function doLogin() {
   var email = document.getElementById('loginEmail').value.trim();
   var pass  = document.getElementById('loginPass').value;
-
-  if (!email || !pass) return alert('أدخل الإيميل وكلمة المرور');
+  if (!email || !pass) return showToast('أدخل الإيميل وكلمة المرور', 'error');
 
   var { data, error } = await sb.auth.signInWithPassword({ email: email, password: pass });
-
-  if (error) return alert('خطأ: ' + error.message);
+  if (error) return showToast('خطأ: ' + error.message, 'error');
 
   closeModal('authModal');
+  showToast('أهلاً بعودتك لخُطوة! 👋', 'success');
 }
 
-/* ── تسجيل حساب جديد ── */
 async function doRegister() {
   var name  = document.getElementById('regName').value.trim();
   var email = document.getElementById('regEmail').value.trim();
   var pass  = document.getElementById('regPass').value;
-
-  if (!name || !email || !pass) return alert('أكمل جميع الحقول');
-  if (pass.length < 6) return alert('كلمة المرور لازم 6 أحرف على الأقل');
+  if (!name || !email || !pass) return showToast('أكمل جميع الحقول', 'error');
+  if (pass.length < 6) return showToast('كلمة المرور لازم 6 أحرف على الأقل', 'error');
 
   var { data, error } = await sb.auth.signUp({
-    email: email,
-    password: pass,
+    email: email, password: pass,
     options: { data: { full_name: name } }
   });
-
-  if (error) return alert('خطأ: ' + error.message);
+  if (error) return showToast('خطأ: ' + error.message, 'error');
 
   closeModal('authModal');
-  alert('✅ تم التسجيل! تحقق من إيميلك لتفعيل الحساب');
+  showToast('✅ تم التسجيل! تحقق من إيميلك لتفعيل حسابك في خُطوة', 'success');
 }
 
-/* ── تسجيل خروج ── */
 async function doLogout() {
   var { error } = await sb.auth.signOut();
-  if (error) return alert('خطأ: ' + error.message);
-
+  if (error) return showToast('خطأ: ' + error.message, 'error');
   currentUser = null;
   currentUserRole = null;
   updateNavUI();
+  showToast('تم تسجيل الخروج – نراكم في رحلة قادمة! 🥾', 'success');
 }
 
-/* ── الاستماع لتغير حالة المستخدم ── */
 sb.auth.onAuthStateChange(function(event, session) {
   if (session && session.user) {
     currentUser = session.user;
@@ -59,7 +47,6 @@ sb.auth.onAuthStateChange(function(event, session) {
   updateNavUI();
 });
 
-/* ── تحديث واجهة Nav حسب حالة الدخول ── */
 function updateNavUI() {
   var loginBtn  = document.getElementById('navLoginBtn');
   var regBtn    = document.getElementById('navRegBtn');
@@ -81,11 +68,10 @@ function updateNavUI() {
   }
 }
 
-/* ── قائمة المستخدم (للمستقبل) ── */
 function handleUserMenu() {
   if (currentUserRole === 'organizer' || currentUserRole === 'admin') {
     window.location.href = 'admin/dashboard.html';
   } else {
-    alert('مرحباً ' + (currentUser.user_metadata?.full_name || '') + '!\nحسابك: مستخدم عادي');
+    showToast('مرحباً في خُطوة، ' + (currentUser.user_metadata?.full_name || '') + '! 🥾', 'success');
   }
 }
