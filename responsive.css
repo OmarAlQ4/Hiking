@@ -1,0 +1,21 @@
+/* ═══════════════════════════════════════════
+   responsive.css – تعديلات الجوال والتابلت
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 0 20px 60px; }
+  section { padding: 60px 20px; }
+  .search-bar { padding: 24px 20px; }
+  .organizer-cta { margin: 0 20px 60px; padding: 36px 24px; }
+  .hero-stats { gap: 28px; }
+  footer { padding: 40px 20px; }
+  .modal { padding: 28px 20px; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .detail-body { padding: 20px 20px 120px; }
+  .detail-hero-overlay { padding: 0 20px 0; }
+  .detail-footer { padding: 14px 20px; }
+  .detail-hero-img { height: 220px; }
+  .detail-title { font-size: 20px; }
+}
