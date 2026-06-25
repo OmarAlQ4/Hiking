@@ -1,0 +1,27 @@
+/* ═══════════════════════════════════════════
+   main.css – المتغيرات الأساسية، الخطوط، الريست
+   ═══════════════════════════════════════════ */
+
+:root {
+  --sand: #E8DCC8;
+  --clay: #C4773B;
+  --slate: #2D3A32;
+  --moss: #4A6741;
+  --dusk: #1A2218;
+  --cream: #F5F0E8;
+  --mist: #8FA68A;
+  --alert: #E05C2A;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--dusk);
+  color: var(--cream);
+  overflow-x: hidden;
+}
