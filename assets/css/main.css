@@ -1,16 +1,54 @@
-/* ═══════════════════════════════════════════
-   main.css – المتغيرات الأساسية، الخطوط، الريست
-   ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════
+   main.css – هوية خُطوة (الخطوة الأولى لرحلتك)
+   ═══════════════════════════════════════════════════ */
 
 :root {
-  --sand: #E8DCC8;
-  --clay: #C4773B;
-  --slate: #2D3A32;
-  --moss: #4A6741;
-  --dusk: #1A2218;
-  --cream: #F5F0E8;
-  --mist: #8FA68A;
-  --alert: #E05C2A;
+  /* ألوان خُطوة – مستوحاة من اللوغو الأخضر الجبلي */
+  --forest: #2D6B3F;
+  --forest-light: #3D9B56;
+  --forest-dark: #1B4D2B;
+  --mountain: #4A8B5C;
+  --river: #5BB8A0;
+  --sky: #7ECFC0;
+  --stone: #2A3A2E;
+  --stone-light: #344A3A;
+  --night: #0F1A12;
+  --night-light: #152218;
+  --cream: #F5F8F5;
+  --cream-warm: #EDF2ED;
+  --mist: #8FB89A;
+  --mist-dim: #6A9A7C;
+  --gold: #E8B84D;
+  --gold-light: #F0D080;
+  --clay: #D4873E;
+  --clay-light: #E8A65C;
+  --alert: #D94A38;
+  --white: #FFFFFF;
+  --sand: #E2EBE4;
+
+  /* ظلال */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.15);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.25);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.35);
+  --shadow-glow: 0 0 40px rgba(45,107,63,0.15);
+  --shadow-gold: 0 4px 20px rgba(232,184,77,0.2);
+
+  /* زجاج */
+  --glass: rgba(15,26,18,0.78);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-light: rgba(255,255,255,0.04);
+
+  /* حدود */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 50px;
+
+  /* انتقالات */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --fast: 0.2s var(--ease);
+  --med: 0.35s var(--ease);
+  --slow: 0.5s var(--ease);
 }
 
 * {
@@ -19,9 +57,84 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Tajawal', sans-serif;
-  background: var(--dusk);
+  background: var(--night);
   color: var(--cream);
   overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* سكرول بار */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--night); }
+::-webkit-scrollbar-thumb { background: var(--stone-light); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--forest); }
+
+/* أنيميشن */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes stepPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45,107,63,0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(45,107,63,0); }
+}
+
+@keyframes mountainFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(0.5deg); }
+  75% { transform: translateY(2px) rotate(-0.3deg); }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s var(--ease) both;
+}
+
+.animate-in-delay-1 { animation-delay: 0.1s; }
+.animate-in-delay-2 { animation-delay: 0.2s; }
+.animate-in-delay-3 { animation-delay: 0.3s; }
+.animate-in-delay-4 { animation-delay: 0.4s; }
+
+/* لوغو مخصص */
+.nav-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.1);
+  transition: transform var(--fast);
+}
+.nav-logo-img:hover { transform: scale(1.05); }
+
+.footer-logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.1);
+  margin-bottom: 12px;
 }
