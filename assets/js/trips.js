@@ -1,12 +1,6 @@
-/* ═══════════════════════════════════════════
-   trips.js – بيانات الرحلات، جلبها من السابابيز، وعرضها فقط
-   ═══════════════════════════════════════════ */
-
-/* ── بيانات احتياطية (تظهر لو قاعدة البيانات فاضية) ── */
 var trips = [
   {
-    id: 1,
-    title: 'هايك وادي نمار مع شلال الغروب',
+    id: 1, title: 'هايك وادي نمار مع شلال الغروب',
     type: 'هايكنق', location: 'الرياض',
     place: 'وادي نمار – غرب الرياض',
     startPoint: 'موقف وادي نمار الرئيسي، طريق الملك عبدالعزيز',
@@ -30,8 +24,7 @@ var trips = [
     cardDate: '20 يونيو',
   },
   {
-    id: 2,
-    title: 'تسلق قمة جبل اللوز الثلجية',
+    id: 2, title: 'تسلق قمة جبل اللوز الثلجية',
     type: 'تسلق وصخور', location: 'تبوك',
     place: 'جبل اللوز – تبوك',
     startPoint: 'بوابة محمية جبل اللوز، طريق تبوك–شرما',
@@ -54,8 +47,7 @@ var trips = [
     cardDate: '25 يونيو',
   },
   {
-    id: 3,
-    title: 'ساكتون في شلالات وادي ضي بالباحة',
+    id: 3, title: 'ساكتون في شلالات وادي ضي بالباحة',
     type: 'ساكتون', location: 'الباحة',
     place: 'وادي ضي – الباحة',
     startPoint: 'مدخل وادي ضي، طريق الباحة–بلجرشي',
@@ -79,8 +71,7 @@ var trips = [
     cardDate: '27 يونيو',
   },
   {
-    id: 4,
-    title: 'ليلة تحت النجوم في جبال عسير',
+    id: 4, title: 'ليلة تحت النجوم في جبال عسير',
     type: 'كمبينق', location: 'عسير',
     place: 'جبال عسير – أبها',
     startPoint: 'ميدان أبها الدولي، مقابل فندق الهيلتون',
@@ -103,8 +94,7 @@ var trips = [
     cardDate: '30 يونيو',
   },
   {
-    id: 5,
-    title: 'غروب الربع الخالي – 3 أيام برية',
+    id: 5, title: 'غروب الربع الخالي – 3 أيام برية',
     type: 'صحراء', location: 'الرياض',
     place: 'الربع الخالي – جنوب الرياض',
     startPoint: 'استراحة العزيزية، طريق الرياض–وادي الدواسر',
@@ -127,8 +117,7 @@ var trips = [
     cardDate: '5 يوليو',
   },
   {
-    id: 6,
-    title: 'هايك شلالات الدفينة الخضراء',
+    id: 6, title: 'هايك شلالات الدفينة الخضراء',
     type: 'وادي', location: 'المدينة المنورة',
     place: 'وادي الدفينة – المدينة المنورة',
     startPoint: 'مدخل الوادي من جهة طريق العيون',
@@ -153,180 +142,102 @@ var trips = [
   },
 ];
 
-/* ── مصفوفة كل الرحلات (تبدأ بالاحتياطية وتتحدث من السابابيز) ── */
 var allTrips = trips.slice();
 
-/* ── عرض بطاقات الرحلات في الشبكة ── */
 function renderCards(list) {
   var grid = document.getElementById('tripsGrid');
-
   if (!list || list.length === 0) {
-    grid.innerHTML = '<p style="color:var(--mist);text-align:center;grid-column:1/-1;padding:40px">لا توجد رحلات مطابقة</p>';
+    grid.innerHTML = '<p style="color:var(--mist-dim);text-align:center;grid-column:1/-1;padding:60px 20px;font-size:16px">لا توجد رحلات مطابقة لبحثك 🏜</p>';
     return;
   }
-
-  grid.innerHTML = list.map(function(t) {
+  grid.innerHTML = list.map(function(t, idx) {
     var starsHtml = '★'.repeat(t.rating) + (t.rating < 5 ? '☆'.repeat(5 - t.rating) : '');
     var badgesHtml = t.badges.map(function(b) { return '<span class="' + b.cls + '">' + b.text + '</span>'; }).join('');
-
-    return '<div class="trip-card" onclick="openDetail(' + t.id + ')">' +
-      '<div class="card-img-wrap">' +
-        '<img class="card-img" src="' + t.image + '" alt="' + t.type + '" loading="lazy">' +
-        '<div class="card-badges">' + badgesHtml + '</div>' +
-      '</div>' +
+    var delay = Math.min(idx * 0.08, 0.5);
+    return '<div class="trip-card animate-in" style="animation-delay:' + delay + 's" onclick="openDetail(' + t.id + ')">' +
+      '<div class="card-img-wrap"><img class="card-img" src="' + t.image + '" alt="' + t.type + '" loading="lazy"><div class="card-badges">' + badgesHtml + '</div></div>' +
       '<div class="card-body">' +
-        '<div class="card-meta">' +
-          '<span class="card-type">' + t.type + '</span>' +
-          '<span class="dot"></span>' +
-          '<span class="card-loc">📍 ' + t.location + '</span>' +
-        '</div>' +
+        '<div class="card-meta"><span class="card-type">' + t.type + '</span><span class="dot"></span><span class="card-loc">📍 ' + t.location + '</span></div>' +
         '<div class="card-title">' + t.title + '</div>' +
         '<div class="card-organizer">مع <span>' + t.organizer + '</span></div>' +
-        '<div class="card-details">' +
-          '<div class="detail-item">⏱ ' + t.duration + '</div>' +
-          '<div class="detail-item">👥 ' + t.seatsTotal + ' شخص</div>' +
-          '<div class="detail-item">📅 ' + t.cardDate + '</div>' +
-        '</div>' +
-        '<div class="card-footer">' +
-          '<div>' +
-            '<div class="card-price">' + t.price + ' ر<small>/شخص</small></div>' +
-            '<div style="display:flex;align-items:center;gap:4px;margin-top:3px;">' +
-              '<span class="stars">' + starsHtml + '</span>' +
-              '<span class="reviews">(' + t.reviews + ')</span>' +
-            '</div>' +
-          '</div>' +
-          '<button class="btn-book" onclick="event.stopPropagation();bookFromCard(' + t.id + ')">احجز ←</button>' +
-        '</div>' +
-      '</div>' +
-    '</div>';
+        '<div class="card-details"><div class="detail-item">⏱ ' + t.duration + '</div><div class="detail-item">👥 ' + t.seatsTotal + ' شخص</div><div class="detail-item">📅 ' + t.cardDate + '</div></div>' +
+        '<div class="card-footer"><div><div class="card-price">' + t.price + ' ر<small>/شخص</small></div><div style="display:flex;align-items:center;gap:4px;margin-top:4px;"><span class="stars">' + starsHtml + '</span><span class="reviews">(' + t.reviews + ')</span></div></div>' +
+        '<button class="btn-book" onclick="event.stopPropagation();bookFromCard(' + t.id + ')">احجز ←</button></div>' +
+      '</div></div>';
   }).join('');
 }
 
-/* ── فتح نافذة تفاصيل الرحلة ── */
 function openDetail(id) {
   var t = allTrips.find(function(x) { return x.id == id; });
   if (!t) return;
-
   document.getElementById('dImg').src = t.image;
   document.getElementById('dTitle').textContent = t.title;
   document.getElementById('dOrganizer').textContent = t.organizer;
   document.getElementById('dGuideInline').textContent = 'مرشد: ' + t.guide;
-
   var starsHtml = '★'.repeat(t.rating) + (t.rating < 5 ? '☆'.repeat(5 - t.rating) : '');
   document.getElementById('dStars').textContent = starsHtml;
   document.getElementById('dRatingNum').textContent = t.rating + '.0';
   document.getElementById('dRatingCount').textContent = '(' + t.reviews + ' تقييم)';
-
-  document.getElementById('dBadges').innerHTML = t.badges.map(function(b) {
-    return '<span class="' + b.cls + '">' + b.text + '</span>';
-  }).join('');
-
+  document.getElementById('dBadges').innerHTML = t.badges.map(function(b) { return '<span class="' + b.cls + '">' + b.text + '</span>'; }).join('');
   var diffCls = t.difficulty === 'easy' ? 'diff-easy' : t.difficulty === 'mid' ? 'diff-mid' : 'diff-hard';
-
   document.getElementById('dInfoGrid').innerHTML =
     '<div class="detail-info-card"><div class="detail-info-label">الصعوبة</div><div class="detail-info-value"><span class="diff-pill ' + diffCls + '">' + t.diffLabel + '</span></div></div>' +
     '<div class="detail-info-card"><div class="detail-info-label">المسافة</div><div class="detail-info-value">' + t.distance + '</div></div>' +
     '<div class="detail-info-card"><div class="detail-info-label">المدة</div><div class="detail-info-value">' + t.duration + '</div></div>' +
     '<div class="detail-info-card"><div class="detail-info-label">المقاعد المتاحة</div><div class="detail-info-value clay">' + t.seatsAvailable + ' من ' + t.seatsTotal + '</div></div>';
-
   document.getElementById('dDates').innerHTML = t.dates.map(function(d, i) {
     var low = d.seats <= 4;
-    var activeClass = i === 0 ? ' active-date' : '';
-    var lowClass = low ? ' low' : '';
-    var icon = low ? '🔴' : '🟢';
-    return '<div class="detail-date-item' + activeClass + '">' +
-      '<span class="date-label">📅 ' + d.label + '</span>' +
-      '<span class="date-seats' + lowClass + '">' + icon + ' ' + d.seats + ' مقعد متاح</span>' +
-    '</div>';
+    return '<div class="detail-date-item' + (i === 0 ? ' active-date' : '') + '"><span class="date-label">📅 ' + d.label + '</span><span class="date-seats' + (low ? ' low' : '') + '">' + (low ? '🔴' : '🟢') + ' ' + d.seats + ' مقعد متاح</span></div>';
   }).join('');
-
   document.getElementById('dPlace').textContent = t.place;
   document.getElementById('dStartPoint').textContent = t.startPoint;
   document.getElementById('dMapBtn').href = t.mapUrl;
-
   document.getElementById('dGuideName').textContent = t.guide;
   document.getElementById('dGuideAvatar').textContent = t.guide.charAt(0);
-
-  var incHtml = t.includes.map(function(x) { return '<span class="include-tag">✓ ' + x + '</span>'; }).join('');
-  var excHtml = t.excludes.map(function(x) { return '<span class="exclude-tag">✗ ' + x + '</span>'; }).join('');
-  document.getElementById('dIncludes').innerHTML = incHtml + excHtml;
-
-  document.getElementById('dBring').innerHTML = t.toBring.map(function(x) {
-    return '<span class="bring-item">' + x + '</span>';
-  }).join('');
-
+  document.getElementById('dIncludes').innerHTML = t.includes.map(function(x) { return '<span class="include-tag">✓ ' + x + '</span>'; }).join('') + t.excludes.map(function(x) { return '<span class="exclude-tag">✗ ' + x + '</span>'; }).join('');
+  document.getElementById('dBring').innerHTML = t.toBring.map(function(x) { return '<span class="bring-item">' + x + '</span>'; }).join('');
   document.getElementById('dAge').textContent = t.ageRange;
   document.getElementById('dPriceFooter').textContent = t.price + ' ريال';
-
-  document.getElementById('dBookBtn').onclick = function() {
-    closeDetail();
-    openBooking(t.title, t.type, t.location, String(t.price));
-  };
-
+  document.getElementById('dBookBtn').onclick = function() { closeDetail(); openBooking(t.title, t.type, t.location, String(t.price)); };
   var overlay = document.getElementById('detailOverlay');
   overlay.classList.add('open');
   overlay.scrollTop = 0;
   document.body.style.overflow = 'hidden';
 }
 
-/* ── إغلاق نافذة التفاصيل ── */
 function closeDetail() {
   document.getElementById('detailOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
 
-/* ── إغلاق بالضغط خارج النافذة ── */
 document.getElementById('detailOverlay').addEventListener('click', function(e) {
   if (e.target === document.getElementById('detailOverlay')) closeDetail();
 });
 
-/* ── جلب الرحلات من السابابيز ── */
 async function loadTrips() {
+  var grid = document.getElementById('tripsGrid');
+  grid.innerHTML = '<div class="skeleton skeleton-card"></div>'.repeat(6);
   try {
-    var { data, error } = await sb
-      .from('trips')
-      .select('*, trip_dates(*)')
-      .eq('status', 'published')
-      .order('created_at', { ascending: false });
-
+    var { data, error } = await sb.from('trips').select('*, trip_dates(*)').eq('status', 'published').order('created_at', { ascending: false });
     if (data && data.length > 0) {
       allTrips = data.map(function(t) {
         var diffLabel = t.difficulty === 'easy' ? 'سهل' : t.difficulty === 'mid' ? 'متوسط' : 'صعب';
-        var cardDate = (t.trip_dates && t.trip_dates[0]) ? t.trip_dates[0].date_label : '';
-
         return {
-          id: t.id,
-          title: t.title,
-          type: t.type,
-          location: t.location,
-          place: t.place,
-          startPoint: t.start_point,
-          mapUrl: t.map_url,
-          difficulty: t.difficulty,
-          diffLabel: diffLabel,
-          distance: t.distance,
-          duration: t.duration,
-          price: t.price,
-          includes: t.includes || [],
-          excludes: t.excludes || [],
-          seatsAvailable: t.seats_available,
-          seatsTotal: t.seats_total,
-          guide: t.guide,
-          organizer: t.organizer_id,
-          rating: 5,
-          reviews: 0,
-          image: t.image_url,
+          id: t.id, title: t.title, type: t.type, location: t.location,
+          place: t.place, startPoint: t.start_point, mapUrl: t.map_url,
+          difficulty: t.difficulty, diffLabel: diffLabel,
+          distance: t.distance, duration: t.duration, price: t.price,
+          includes: t.includes || [], excludes: t.excludes || [],
+          seatsAvailable: t.seats_available, seatsTotal: t.seats_total,
+          guide: t.guide, organizer: t.organizer_id,
+          rating: 5, reviews: 0, image: t.image_url,
           dates: (t.trip_dates || []).map(function(d) { return { label: d.date_label, seats: d.seats }; }),
-          toBring: t.to_bring || [],
-          ageRange: t.age_range,
+          toBring: t.to_bring || [], ageRange: t.age_range,
           badges: [{ text: diffLabel, cls: 'badge badge-diff-' + t.difficulty }],
-          cardDate: cardDate,
+          cardDate: (t.trip_dates && t.trip_dates[0]) ? t.trip_dates[0].date_label : '',
         };
       });
     }
-  } catch (err) {
-    console.warn('ما قدرت أجلب من السابابيز، استخدم البيانات الاحتياطية:', err);
-  }
-
+  } catch (err) { console.warn('بيانات احتياطية:', err); }
   renderCards(allTrips);
 }
