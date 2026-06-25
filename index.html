@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>وِعْر – رحلات وفعاليات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS بالترتيب الصحيح -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">وِعْر<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#">الرحلات</a></li>
+    <li><a href="#">الفعاليات</a></li>
+    <li><a href="#">المنظمون</a></li>
+    <li><a href="#">المناطق</a></li>
+  </ul>
+  <div class="nav-cta">
+    <button class="btn-outline" id="navLoginBtn" onclick="openModal('login')">دخول</button>
+    <button class="btn-primary" id="navRegBtn" onclick="openModal('register')">سجّل</button>
+    <button class="btn-primary" id="navUserBtn" style="display:none" onclick="handleUserMenu()"></button>
+    <button class="btn-outline" id="navLogoutBtn" style="display:none" onclick="doLogout()">خروج</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">🏔 رحلات برية | فعاليات | مغامرات</div>
+  <h1>اكتشف <em>الوعر</em><br>ابحث عن نفسك</h1>
+  <p class="hero-sub">هايكنق، صخور، كهوف، واحات. كل رحلة قصة ما انقالت لك بعد.</p>
+  <div class="hero-actions">
+    <button class="btn-hero" onclick="scrollTo({top:500,behavior:'smooth'})">ابحث عن رحلة</button>
+    <button class="btn-hero-ghost" onclick="openModal('organizer')">أضف رحلتك ←</button>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">+2,400</div><div class="stat-label">مشترك في الرحلات</div></div>
+    <div><div class="stat-num">180+</div><div class="stat-label">رحلة وفعالية</div></div>
+    <div><div class="stat-num">4.9★</div><div class="stat-label">متوسط التقييم</div></div>
+  </div>
+</section>
+
+<!-- SEARCH BAR -->
+<div class="search-bar">
+  <div class="search-field">
+    <label>نوع الفعالية</label>
+    <select id="searchType"><option>الكل</option><option>هايكنق</option><option>صخور وتسلق</option><option>كمبينق</option><option>ساكتون</option><option>وادي</option><option>بحري</option></select>
+  </div>
+  <div class="search-field">
+    <label>المنطقة</label>
+    <select id="searchRegion"><option>كل المناطق</option><option>الرياض</option><option>مكة المكرمة</option><option>عسير</option><option>تبوك</option><option>الباحة</option><option>المدينة</option></select>
+  </div>
+  <div class="search-field">
+    <label>الصعوبة</label>
+    <select id="searchDiff"><option>أي مستوى</option><option>سهل</option><option>متوسط</option><option>صعب</option></select>
+  </div>
+  <div class="search-field">
+    <label>التاريخ</label>
+    <input type="date" id="searchDate">
+  </div>
+  <button class="btn-search" onclick="doSearch()">🔍 بحث</button>
+</div>
+
+<!-- CATEGORIES -->
+<section style="background: rgba(45,58,50,0.4);">
+  <div class="section-header"><h2 class="section-title">تصفّح حسب <span>النوع</span></h2></div>
+  <div class="cats-grid">
+    <div class="cat-card active" data-cat="هايكنق" onclick="filterCat(this)"><div class="cat-icon">🥾</div><div class="cat-name">هايكنق</div><div class="cat-count">47 رحلة</div></div>
+    <div class="cat-card" data-cat="تسلق وصخور" onclick="filterCat(this)"><div class="cat-icon">🧗</div><div class="cat-name">تسلق وصخور</div><div class="cat-count">23 رحلة</div></div>
+    <div class="cat-card" data-cat="كمبينق" onclick="filterCat(this)"><div class="cat-icon">⛺</div><div class="cat-name">كمبينق</div><div class="cat-count">38 رحلة</div></div>
+    <div class="cat-card" data-cat="ساكتون" onclick="filterCat(this)"><div class="cat-icon">🌊</div><div class="cat-name">ساكتون</div><div class="cat-count">19 رحلة</div></div>
+    <div class="cat-card" data-cat="صحراء" onclick="filterCat(this)"><div class="cat-icon">🏜</div><div class="cat-name">صحراء ورمال</div><div class="cat-count">31 رحلة</div></div>
+    <div class="cat-card" data-cat="وادي" onclick="filterCat(this)"><div class="cat-icon">🌿</div><div class="cat-name">وادي وشلالات</div><div class="cat-count">14 رحلة</div></div>
+  </div>
+</section>
+
+<!-- TRIPS -->
+<section>
+  <div class="section-header">
+    <h2 class="section-title">رحلات <span>قادمة</span></h2>
+    <a href="#" class="section-link">شوف الكل ←</a>
+  </div>
+  <div class="trips-grid" id="tripsGrid"></div>
+</section>
+
+<!-- ORGANIZER CTA -->
+<div class="organizer-cta">
+  <div class="cta-text">
+    <h2>عندك رحلة تبي تنظمها؟<br>اعرضها هنا 🏔</h2>
+    <p>سجّل كمنظم وابدأ تبيع مقاعدك لآلاف المغامرين. بدون رسوم تسجيل، عمولة بسيطة بس على كل حجز.</p>
+  </div>
+  <button class="btn-cta" onclick="openModal('organizer')">ابدأ كمنظم ←</button>
+</div>
+
+<!-- REVIEWS -->
+<section style="background: rgba(45,58,50,0.3);">
+  <div class="section-header"><h2 class="section-title">قالوا <span>عن وعر</span></h2></div>
+  <div class="reviews-grid">
+    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"أحسن تجربة في حياتي. الهايك كان منظّم، والمنظم محترف جداً. راح أكرر التجربة!"</div><div class="reviewer"><div class="reviewer-avatar" style="background:#4A6741">خ</div><div><div class="reviewer-name">خالد العمري</div><div class="reviewer-trip">هايك وادي نمار</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"الساكتون في الباحة كان خيالي. المنظم وفّر كل شي حتى المعدات. سعر معقول جداً."</div><div class="reviewer"><div class="reviewer-avatar" style="background:#C4773B">ر</div><div><div class="reviewer-name">ريم السبيعي</div><div class="reviewer-trip">ساكتون وادي ضي</div></div></div></div>
+    <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"من أول رحلة وأنا مدمن على الموقع. سهل الحجز والدفع، ودايم ألقى شي جديد."</div><div class="reviewer"><div class="reviewer-avatar" style="background:#2D3A32">ع</div><div><div class="reviewer-name">عبدالله الحارثي</div><div class="reviewer-trip">تسلق جبل اللوز</div></div></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">وِعْر<span>.</span></div>
+  <div class="footer-sub">الوجهة الأولى لمحبي المغامرة والطبيعة في السعودية</div>
+  <div class="footer-links"><a href="#">الرحلات</a><a href="#">الفعاليات</a><a href="#">المنظمون</a><a href="#">سياسة الإلغاء</a><a href="#">اتصل بنا</a><a href="#">X</a><a href="#">إنستقرام</a></div>
+  <div class="footer-copy">© 2025 وعر – جميع الحقوق محفوظة</div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+    <div class="tabs">
+      <button class="tab active" id="loginTab" onclick="switchTab('login')">دخول</button>
+      <button class="tab" id="registerTab" onclick="switchTab('register')">تسجيل</button>
+    </div>
+    <div id="loginForm">
+      <div class="form-field"><label>الإيميل</label><input id="loginEmail" type="email" placeholder="email@example.com"></div>
+      <div class="form-field"><label>كلمة المرور</label><input id="loginPass" type="password" placeholder="••••••••"></div>
+      <button class="btn-submit" onclick="doLogin()">دخول ←</button>
+      <div class="form-footer">ما عندك حساب؟ <a onclick="switchTab('register')">سجّل الآن</a></div>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="form-field"><label>الاسم الكامل</label><input id="regName" type="text" placeholder="اسمك الكامل"></div>
+      <div class="form-field"><label>الإيميل</label><input id="regEmail" type="email" placeholder="email@example.com"></div>
+      <div class="form-field"><label>كلمة المرور</label><input id="regPass" type="password" placeholder="••••••••"></div>
+      <button class="btn-submit" onclick="doRegister()">سجّل الآن ←</button>
+      <div class="form-footer">عندك حساب؟ <a onclick="switchTab('login')">دخول</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookModal">
+  <div class="modal book-modal">
+    <button class="modal-close" onclick="closeModal('bookModal')">✕</button>
+    <h2>احجز مقعدك 🎒</h2>
+    <div class="book-trip-info">
+      <div class="book-trip-name" id="bookTripName">هايك وادي نمار</div>
+      <div class="book-trip-meta" id="bookTripMeta">هايكنق · الرياض</div>
+    </div>
+    <div class="form-field"><label>عدد المشاركين</label><input type="number" value="1" min="1" max="10" id="numPersons" oninput="updateTotal()"></div>
+    <div class="form-field"><label>اسمك الكامل</label><input type="text" id="bookName" placeholder="اسمك"></div>
+    <div class="form-field"><label>رقم الجوال</label><input type="text" id="bookPhone" placeholder="05xxxxxxxx"></div>
+    <label style="font-size:13px;color:var(--mist);font-weight:600;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:10px;">طريقة الدفع</label>
+    <div class="payment-methods">
+      <button class="pay-btn active" onclick="selectPay(this)">💳 بطاقة</button>
+      <button class="pay-btn" onclick="selectPay(this)">🍎 Apple Pay</button>
+      <button class="pay-btn" onclick="selectPay(this)">💰 مدى</button>
+    </div>
+    <div class="total-row"><span class="total-label">الإجمالي</span><span class="total-amount" id="totalAmount">180 ريال</span></div>
+    <button class="btn-submit" onclick="confirmBooking()">تأكيد الحجز ←</button>
+  </div>
+</div>
+
+<!-- ORGANIZER MODAL -->
+<div class="modal-overlay" id="orgModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('orgModal')">✕</button>
+    <h2>سجّل كمنظم 🏔</h2>
+    <div class="form-field"><label>اسم المنظم أو المجموعة</label><input type="text" id="orgName" placeholder="فريق الجبل السعودي"></div>
+    <div class="form-field"><label>رقم الجوال</label><input type="text" id="orgPhone" placeholder="05xxxxxxxx"></div>
+    <div class="form-field"><label>الإيميل</label><input type="email" id="orgEmail" placeholder="email@example.com"></div>
+    <div class="form-field"><label>نوع الفعاليات اللي تنظمها</label><input type="text" id="orgTypes" placeholder="هايكنق، ساكتون، كمبينق..."></div>
+    <button class="btn-submit" onclick="confirmOrganizer()">أرسل الطلب ←</button>
+  </div>
+</div>
+
+<!-- TRIP DETAIL MODAL -->
+<div class="detail-overlay" id="detailOverlay">
+  <div class="detail-modal">
+    <button class="detail-close" onclick="closeDetail()">✕</button>
+    <img class="detail-hero-img" id="dImg" src="" alt="">
+    <div class="detail-hero-overlay">
+      <div class="detail-title-block">
+        <div class="detail-badges-top" id="dBadges"></div>
+        <div class="detail-title" id="dTitle"></div>
+        <div class="detail-organizer">مع <strong id="dOrganizer"></strong> · <span id="dGuideInline"></span></div>
+      </div>
+      <div class="detail-rating">
+        <span class="stars" id="dStars"></span>
+        <span id="dRatingNum"></span>
+        <small id="dRatingCount"></small>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-grid" id="dInfoGrid"></div>
+      <div class="detail-section">
+        <div class="detail-section-title">📅 التواريخ المتاحة</div>
+        <div class="detail-dates" id="dDates"></div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">📍 الموقع ونقطة الانطلاق</div>
+        <div class="detail-grid" style="margin-bottom:14px">
+          <div class="detail-info-card"><div class="detail-info-label">المكان / المسار</div><div class="detail-info-value" id="dPlace"></div></div>
+          <div class="detail-info-card"><div class="detail-info-label">نقطة الانطلاق</div><div class="detail-info-value" id="dStartPoint"></div></div>
+        </div>
+        <a class="map-btn" id="dMapBtn" href="#" target="_blank">🗺 افتح في خرائط جوجل</a>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">🧭 المرشد / القائد</div>
+        <div class="guide-card">
+          <div class="guide-avatar" id="dGuideAvatar"></div>
+          <div><div class="guide-name" id="dGuideName"></div><div class="guide-role">مرشد معتمد · وعر</div></div>
+        </div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">✅ ماذا يشمل السعر</div>
+        <div class="includes-grid" id="dIncludes"></div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">🎒 ماذا تجيب معك</div>
+        <div class="bring-list" id="dBring"></div>
+      </div>
+      <div class="detail-section">
+        <div class="detail-section-title">👤 الفئة المستهدفة والشروط</div>
+        <div class="detail-info-card"><div class="detail-info-value" id="dAge"></div></div>
+      </div>
+    </div>
+    <div class="detail-footer">
+      <div class="detail-price-block">
+        <div class="price-main" id="dPriceFooter"></div>
+        <div class="price-sub">للشخص الواحد · شامل الضريبة</div>
+      </div>
+      <button class="btn-detail-book" id="dBookBtn">احجز مقعدك ←</button>
+    </div>
+  </div>
+</div>
+
+<!-- JS بالترتيب الصحيح: الاتصال ← المصادقة ← الرحلات ← الواجهة -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/trips.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
